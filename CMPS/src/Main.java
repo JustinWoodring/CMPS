@@ -89,12 +89,12 @@ public class Main extends Application{
 		primaryStage.setResizable(false);
 		
 		button1.setOnAction(e -> {
-			double interest = Double.parseDouble(text1.getText())/100;
+			double interest = Double.parseDouble(text1.getText())/1200;
 			double amount = Double.parseDouble(text2.getText());
-			double time = Integer.parseInt(text3.getText());
+			double time = Integer.parseInt(text3.getText())*12;
 			double totalAmount = 0;
-			totalAmount = amount * (Math.pow((1 + interest/1),1*time));
-			double monthlyAmount = totalAmount/(time*12);
+			double monthlyAmount = amount * ((interest*Math.pow((1+interest),time))/(Math.pow((1+interest),time)-1));
+			totalAmount = monthlyAmount * time;
 			text4.setText(String.format("$%.2f", monthlyAmount));
 			text5.setText(String.format("$%.2f", totalAmount));
 		});
