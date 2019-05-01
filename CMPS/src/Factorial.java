@@ -20,7 +20,7 @@ public class Factorial extends Application{
 		Scene primaryScene = new Scene(root,300,75);
 		TextField input = new TextField();
 		input.prefWidthProperty().bind((root.widthProperty().subtract(20)).divide(3));
-		Button button = new Button("Factorialize:");
+		Button button = new Button("Get Largest:");
 		button.prefWidthProperty().bind((root.widthProperty().subtract(20)).divide(3));
 		Label label = new Label("");
 		label.prefWidthProperty().bind((root.widthProperty().subtract(20)).divide(3));
@@ -29,15 +29,30 @@ public class Factorial extends Application{
 		root.add(label, 3, 1);
 		
 		button.setOnAction(e ->{
-			label.setText(getLargest(input.getText().split(" "),0));
+			label.setText(getLargest(input.getText().split(" ")));
 		});
 		
 		primaryStage.setScene(primaryScene);
 		primaryStage.show();
 	}
-		
+	
+	public static String getLargest(String[] array) {
+		int point = 0;
+		if(point < array.length-1) {
+			return String.valueOf(Math.max(Integer.parseInt(array[point]), Integer.parseInt(getLargest(array, point+1))));
+		}
+		else {
+			return array[point]; 
+		}
+	}	
+	
 	public static String getLargest(String[] array, int point) {
 			//Integer.parseInt(array[point]) > Integer.parseInt(getLargest(array, point+1))){
-				return array[point];
+				if(point < array.length-1) {
+					return String.valueOf(Math.max(Integer.parseInt(array[point]), Integer.parseInt(getLargest(array, point+1))));
+				}
+				else {
+					return array[point]; 
+				}
 	}
 }
